@@ -2,7 +2,7 @@ import numpy as np
 import json
 from scipy.signal import convolve2d
 
-# הגדרת קרנלים (תבניות) לזיהוי רצפים של 5
+# הגדרת קרנלים לזיהוי רצפים של 5
 # שורה, עמודה ושני אלכסונים
 HORIZONTAL = np.ones((1, 5), dtype=int)
 VERTICAL = np.ones((5, 1), dtype=int)
