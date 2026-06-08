@@ -4,7 +4,7 @@ import numpy as np
 
 class SmartAgent:
 
-    model = None  # משתנה מחלקה (shared)
+    model = None  
 
     def __init__(self, board):
 
@@ -49,9 +49,7 @@ class SmartAgent:
         return board
 
 
-    # -------------------------------- #
     # יצירת כל המהלכים האפשריים
-    # -------------------------------- #
 
     def get_possible_moves(self, player=1):
 
@@ -75,9 +73,7 @@ class SmartAgent:
         return moves
 
 
-    # -------------------------------- #
     # הפעלת מהלך
-    # -------------------------------- #
 
     def apply_move(self, move, player=1):
 
@@ -98,9 +94,7 @@ class SmartAgent:
         return new_board
 
 
-    # -------------------------------- #
     # הערכת לוח עם CNN
-    # -------------------------------- #
 
     def evaluate_boards_batch(self, boards):
 
@@ -116,9 +110,7 @@ class SmartAgent:
         return scores.flatten()
 
 
-    # -------------------------------- #
     # בחירת מהלך ע"י CNN
-    # -------------------------------- #
 
     def choose_move_with_cnn(self, player=1):
 
@@ -137,7 +129,7 @@ class SmartAgent:
             boards_after_moves.append(new_board)
 
 
-        # חיזוי לכל הלוחות בבת אחת (מהיר!)
+        # חיזוי לכל הלוחות בבת אחת 
         scores = self.evaluate_boards_batch(
             boards_after_moves
         )
@@ -151,9 +143,7 @@ class SmartAgent:
 
         return best_move
 
-# -------------------------------- #
 # בדיקה
-# -------------------------------- #
 
 if __name__ == "__main__":
 
