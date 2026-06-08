@@ -64,41 +64,35 @@ history = model.fit(
 )
 
 
-# ---------------- graphs ---------------- #
+# graphs 
 
 import matplotlib.pyplot as plt
 
-# --- גרף 1: Loss ו-MSE (ביחד כפי שהגדרת ב-subplot) ---
 plt.figure(figsize=(12, 5))
 
-# תת-גרף ל-Loss
 plt.subplot(1, 2, 1)
 plt.plot(history.history['loss'], label='Train Loss')
 plt.plot(history.history['val_loss'], label='Val Loss')
 plt.title("Model Loss")
 plt.legend()
 
-# תת-גרף ל-MSE
 plt.subplot(1, 2, 2)
 plt.plot(history.history['mse'], label='Train MSE')
 plt.plot(history.history['val_mse'], label='Val MSE')
 plt.title("Model MSE")
 plt.legend()
 
-# שמירת התמונה המשותפת
-plt.savefig('loss_and_mse_comparison_cnn4.png', dpi=300) # dpi=300 מבטיח איכות גבוהה להדפסה בספר
+plt.savefig('loss_and_mse_comparison_cnn4.png', dpi=300) 
 
-# --- גרף 2: MAE בנפרד ---
-plt.figure(figsize=(6, 5)) # יצירת דף חדש לגרף הבא
+plt.figure(figsize=(6, 5))
 plt.plot(history.history['mae'], label='Train MAE')
 plt.plot(history.history['val_mae'], label='Val MAE')
 plt.title("Model MAE")
 plt.legend()
 
-# שמירת הגרף השני
 plt.savefig('model_mae_results_cnn4.png', dpi=300)
 
-# ---------------- predict ---------------- #
+# predict 
 
 def predict_board(board):
 
@@ -112,6 +106,5 @@ prediction = predict_board(X_test[0])
 print("Prediction:",prediction)
 
 
-# ---------------- save ---------------- #
 
 model.save("pentago_cnn4_model.keras")
