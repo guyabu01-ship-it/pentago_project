@@ -16,7 +16,7 @@ from pentago import *
 Window.clearcolor = (0.95, 0.95, 0.95, 1)
 
 
-# ---------------- MENU ---------------- #
+# MENU
 
 class MenuScreen(Screen):
     def __init__(self, **kwargs):
@@ -80,7 +80,7 @@ class MenuScreen(Screen):
         self.manager.current = 'game'
 
 
-# ---------------- CELL ---------------- #
+# CELL 
 
 class CellButton(Button):
     def __init__(self, row, col, **kwargs):
@@ -111,7 +111,7 @@ class CellButton(Button):
             )
 
 
-# ---------------- CONTROLLER ---------------- #
+# CONTROLLER 
 
 class PentagoController:
     def __init__(self, model, interface):
@@ -127,12 +127,10 @@ class PentagoController:
         self.interface.update_status("Your turn!")
 
     def check_game_end(self, last_i=None, last_j=None):
-        # פונקציית עזר לבדיקת ניצחון של שחקן ספציפי על כל הלוח ללא פקודת any
         def has_player_won(player_sign):
             for r in range(6):
                 for c in range(6):
                     if self.model.board[r, c] == player_sign:
-                        # שימוש ב-check_win המקורי מהמודל שלך עם הקואורדינטות הנכונות
                         if self.model.check_win(r, c):
                             return True
             return False
@@ -178,7 +176,6 @@ class PentagoController:
         self.model.turn_quarter(q_id, direction)
         self.interface.refresh_ui()
 
-        # בדיקה אחרי סיבוב - כאן חשוב לבדוק את כל הלוח כי ניצחון יכול להופיע בכל מקום
         if self.check_game_end():
             return
         self.state = "AGENT_TURN"
@@ -200,7 +197,6 @@ class PentagoController:
             self.model.apply_full_move(i, j, q, s, self.model.agent_sign)
 
         self.interface.refresh_ui()
-        # בדיקה אחרי תור המחשב
         if self.check_game_end():
             return
         self.turn_counter += 1
@@ -246,7 +242,7 @@ class PentagoController:
         return best_move if best_move else (empty[0][0], empty[0][1], 1, 1)
 
 
-# ---------------- QUADRANT & INTERFACE ---------------- #
+# QUADRANT & INTERFACE 
 
 class Quadrant(GridLayout):
     def __init__(self, quad_id, **kwargs):
@@ -307,7 +303,7 @@ class PentagoInterface(FloatLayout):
         self.status_label.text = text
 
 
-# ---------------- APP ---------------- #
+# APP 
 
 class FinalPentagoApp(App):
     game_mode = "RANDOM"
