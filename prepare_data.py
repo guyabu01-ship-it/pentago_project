@@ -20,8 +20,6 @@ class Data_cleaning():
         self.dict7 = {}
 
     def process_pentago_board(self, board_str):
-        """המרה ממחרוזת מספר דצימלי למטריצה 6x6 עם נורמליזציה של 2 ל- (1-)"""
-        # המפתח הוא כבר מספר גדול, אז נמיר אותו כבסיס 10 רגיל
         decimal_value = int(board_str)
 
         flat_board = []
@@ -29,17 +27,14 @@ class Data_cleaning():
         for _ in range(36):
             digit = temp_n % 3
 
-            # --- קטע הנורמליזציה ---
             if digit == 2:
                 digit = -1
-            # -----------------------
 
             flat_board.append(digit)
             temp_n //= 3
 
         flat_board.reverse()
 
-        # בניית המטריצה מתוך הרשימה השטוחה
         matrix_board = [flat_board[i:i + 6] for i in range(0, 36, 6)]
         return matrix_board
 
@@ -62,14 +57,12 @@ class Data_cleaning():
             try:
                 with open(fname, 'r', encoding='utf-8') as f:
                     raw = json.load(f)
-                    # חשוב: k נשאר string כדי ש-int(k, 3) יעבוד אחר כך
                     d = {str(k): tuple(v) for k, v in raw.items()}
                     loaded_dicts.append(d)
             except Exception as e:
                 print(f"Error parsing {fname}: {e}")
                 loaded_dicts.append({})
 
-        # פירוק הרשימה חזרה למשתנים
         self.dict1, self.dict2, self.dict3, self.dict4, self.dict5, self.dict6, self.dict7 = loaded_dicts
         print("\n --- data is loaded ---")
 
@@ -90,10 +83,7 @@ class Data_cleaning():
             if count > 0:
                 avg_score = total_score / count
 
-                # הלוגיקה החדשה:
-                # 1. הופיע לפחות 4 פעמים (count >= 4)
-                # 2. או: ציון לפחות 0.4 (avg_score >= 0.4)
-                # 3. או: ציון קטן מ-0.6- (avg_score <= -0.6)
+               
                 if count >= 3 or avg_score >= 0 or avg_score <= -0.75:
                     try:
                         matrix = self.process_pentago_board(str(board_key))
@@ -160,7 +150,6 @@ class Data_cleaning():
 
 
 
-#normalize to 0, 1, -1
 if __name__ == '__main__':
     cleaner = Data_cleaning()
     cleaner.run()
