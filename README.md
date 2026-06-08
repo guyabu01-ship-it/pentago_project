@@ -1,6 +1,5 @@
 
 
-
 # Pentago AI & Game Engine 
 
 # Project Goals
@@ -8,8 +7,8 @@ The main objective of this project is to build a complete environment for the co
 The project bridges traditional algorithmic game logic with modern Convolutional Neural Networks (CNN) to evaluate board states, recognize spatial patterns, and make strategic decisions.
 
 # Data Representation: The Base-3 Approach
-A unique and crucial aspect of this project's architecture is the way the board data is structured for the neural networks, utilizing a **Base-3 (Ternary)** representation. 
-Since every single spot on the Pentago board can exist in exactly one of three states—Empty, Player 1, or Player 2—encoding the board states in base-3 provides the most efficient, mathematically natural, and compressed way to represent the game. This approach significantly optimizes the data processing and helps the CNN models learn winning patterns more effectively.
+A unique and crucial aspect of this project's architecture is the way the board data is structured for the neural networks, utilizing a **Base 3 encoding** representation. 
+Since every single spot on the Pentago board can exist in exactly one of three states Empty, Player 1, or Player 2 encoding the board states in base 3 provides the most efficient, mathematically natural, and compressed way to represent the game. This approach significantly optimizes the data processing and helps the CNN models learn winning patterns more effectively.
 
 # Tools & Technologies
 * Python 3: The core programming language for all logic and scripting.
