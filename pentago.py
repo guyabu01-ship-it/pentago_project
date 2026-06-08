@@ -281,7 +281,6 @@ class Pentago_game:
             else:
 
                 i, j = self.player_turn()
-                # רק כאן צריך לעדכן לוח!
                 self.board[i][j] = self.player_sign
                 turn = self.agent_sign
                 self.record_board()
@@ -375,7 +374,7 @@ class Pentago_game:
         else:
             return None  # רבע לא חוקי
 
-        # אם הנקודה לא בתוך הרבע — אין שינוי
+        # אם הנקודה לא בתוך הרבע אין שינוי
         if not (base_row <= i <= base_row + 2 and base_col <= j <= base_col + 2):
             return (i, j)
 
@@ -466,7 +465,6 @@ class Pentago_run_games():
             try:
                 with open(fname, 'r', encoding='utf-8') as f:
                     raw = json.load(f)
-                    # המרה של המפתחות ל-int והערכים ל-tuple
                     d = {int(k): tuple(v) for k, v in raw.items()}
                     loaded_dicts.append(d)
             except (ValueError, TypeError, json.JSONDecodeError) as e:
@@ -474,17 +472,14 @@ class Pentago_run_games():
                 loaded_dicts.append({})
         print(" --- loaded dicts --- ")
 
-        # עדכון המילונים באובייקט הנוכחי (self)
         self.dict1, self.dict2, self.dict3, self.dict4, self.dict5, self.dict6, self.dict7 = loaded_dicts
 
-        # טעינת equivalent_set
         if os.path.exists("equivalent_set.json"):
             with open("equivalent_set.json", 'r', encoding='utf-8') as f:
                 self.equivalent_set = set(json.load(f))
         else:
             self.equivalent_set = set()
 
-        # עדכון האובייקט pentago - שימוש בלולאה כדי לחסוך שורות
         for i in range(1, 8):
             setattr(self.pentago, f'dict{i}', getattr(self, f'dict{i}'))
 
@@ -494,8 +489,6 @@ class Pentago_run_games():
         for i in range(1, len(self.pentago.boards_history)):
             board = self.pentago.boards_history[i]
             score = self.pentago.grades[i]
-
-
 
             # מוצאים את המילון המתאים לפי האינדקס
             target_dict = self.pentago.choose_right_dictionary(i)
